@@ -7,7 +7,7 @@ GitHub: https://github.com/controlado
 from json import dump
 from typing import Any
 
-from requests import session
+from requests.sessions import Session
 
 
 class Riot:
@@ -38,7 +38,7 @@ class Riot:
         League of Legends, que são necessárias para os
         métodos da classe.
         """
-        self.session = session()
+        self.session = Session()
         self.skins_data = self.get_skins_data()
 
     def request(self, *args, **kwargs) -> Any:
