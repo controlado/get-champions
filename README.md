@@ -2,7 +2,7 @@
 
 ### Consiga os dados de todos os campeões do League of Legends. 
 
-Ao executar o arquivo principal, vai ser gerado um JSON contendo os dados.
+Ao executar o arquivo principal, vai ser gerado um JSON contendo todos os dados.
 
 O código inteiro está documentado, a fim de passar os conhecimentos! :)
 
