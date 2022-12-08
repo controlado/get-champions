@@ -53,7 +53,9 @@ class Riot:
         de cada campeão do League of Legends, pra conseguir as skins do
         mesmo de forma efetiva, o método chama o get_champion_skins().
 
-        List comprehension não é utilizada nesse método por otimização.
+        List comprehension não é usada nesse método porque é necessário
+        criar uma variável champion_id, resultado de outro método, caso
+        fosse em list comprehension, seria necessário repetir a chamada.
 
         Retorna:
             list[dict]: Lista com os campeões, seus dados e skins.
@@ -81,6 +83,9 @@ class Riot:
         Através do skin_data, gera uma lista com as informações de
         cada skin desse campeão, verificando se o id do campeão da
         skin é referente ao champion_id (parâmetro do método).
+
+        List comprehension pode ser utilizada nesse método porque
+        apesar de complexo, não precisa repetir nenhum código.
 
         Parâmetros:
             champion_id (str): ID do campeão.
