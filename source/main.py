@@ -4,7 +4,6 @@ Discord: Balaclava#1912
 GitHub: https://github.com/controlado
 """
 
-from datetime import datetime
 from json import dump
 from typing import Any
 
