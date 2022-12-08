@@ -4,6 +4,7 @@ Discord: Balaclava#1912
 GitHub: https://github.com/controlado
 """
 
+from datetime import datetime
 from json import dump
 from typing import Any
 
@@ -66,7 +67,7 @@ class Riot:
             if not self.skins_data[skin]["isBase"]:
                 continue
 
-            champion_id = self.get_champion_id(self.skins_data[skin])
+            champion_id = self.get_champion_id(skin)
             response_data = {
                 "id": champion_id,
                 "name": self.skins_data[skin]["name"],
@@ -102,7 +103,7 @@ class Riot:
             }
             for skin in self.skins_data
             if not self.skins_data[skin]["isBase"]
-            if self.get_champion_id(self.skins_data[skin]) == champion_id
+            if self.get_champion_id(skin) == champion_id
         ]
 
     def get_skins_data(self) -> dict:
@@ -114,9 +115,9 @@ class Riot:
         url = "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/skins.json"
         return self.request(method="get", url=url)
 
-    def get_champion_id(self, skin: dict) -> str:
+    def get_champion_id(self, skin_index: int) -> str:
         """Retorna o ID do campeão baseado no splashPath."""
-        endpoint = skin["splashPath"]
+        endpoint = self.skins_data[skin_index]["splashPath"]
         endpoint_splited = endpoint.split("/")
         return endpoint_splited[-2]
 
