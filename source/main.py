@@ -5,6 +5,7 @@ GitHub: https://github.com/controlado
 """
 
 from json import dump
+from timeit import timeit
 from typing import Any
 
 from requests.sessions import Session
@@ -53,29 +54,20 @@ class Riot:
         de cada campeão do League of Legends, pra conseguir as skins do
         mesmo de forma efetiva, o método chama o get_champion_skins().
 
-        List comprehension não é usada nesse método porque é necessário
-        criar uma variável champion_id, resultado de outro método, caso
-        fosse em list comprehension, seria necessário repetir a chamada.
-
         Retorna:
             list[dict]: Lista com os campeões, seus dados e skins.
         """
-        response = []
-
-        for skin in self.skins_data:
-            if not self.skins_data[skin]["isBase"]:
-                continue
-
-            champion_id = self.get_champion_id(skin)
-            response_data = {
+        return [
+            {
                 "id": champion_id,
                 "name": self.skins_data[skin]["name"],
                 "art": self.get_splash_art(champion_id, skin),
                 "skins": self.get_champion_skins(champion_id)
             }
-            response.append(response_data)
-
-        return response
+            for skin in self.skins_data
+            if self.skins_data[skin]["isBase"]
+            if (champion_id := self.get_champion_id(skin))
+        ]
 
     def get_champion_skins(self, champion_id: str) -> list[dict]:
         """Retorna uma lista com todas as skins de um campeão.
@@ -83,9 +75,6 @@ class Riot:
         Através do skin_data, gera uma lista com as informações de
         cada skin desse campeão, verificando se o id do campeão da
         skin é referente ao champion_id (parâmetro do método).
-
-        List comprehension pode ser utilizada nesse método porque
-        apesar de complexo, não precisa repetir nenhum código.
 
         Parâmetros:
             champion_id (str): ID do campeão.
