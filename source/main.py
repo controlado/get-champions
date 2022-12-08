@@ -5,7 +5,6 @@ GitHub: https://github.com/controlado
 """
 
 from json import dump
-from timeit import timeit
 from typing import Any
 
 from requests.sessions import Session
