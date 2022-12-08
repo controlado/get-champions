@@ -15,7 +15,7 @@ git clone https://github.com/controlado/get-champions.git
 ```
 
 ```
-pip install -r ./source/requirements.txt
+pip install -r ./requirements.txt
 ```
 
 ```
